@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true finleymcilwaine/docker-react npm run test
+
+deploy:
+  # edge: true # if getting the missing bucket name error
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: docker-react
+  env: DockerReact-env
+  bucket_name: elasticbeanstalk-us-east-2-666739205128
+  bucket_path: docker-react
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
